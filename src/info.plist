@@ -109,7 +109,7 @@ clean() {  # sets $cleaned and $removed
   IFS='&amp;' read -r -a parts &lt;&lt;&lt; "$q"
   for p in "${parts[@]}"; do
     case "${p%%=*}" in
-      utm_*|fbclid|gclid|dclid|gbraid|wbraid|msclkid|yclid|twclid|ttclid|igshid|mc_cid|mc_eid|_hsenc|_hsmi|mkt_tok|vero_id|oly_anon_id|oly_enc_id|_ga|_gl|si|ref_src|ref_url|trk) removed="${removed:+$removed, }${p%%=*}" ;;
+      utm_*|fbclid|gclid|dclid|gbraid|wbraid|msclkid|yclid|twclid|ttclid|igshid|mc_cid|mc_eid|_hsenc|_hsmi|mkt_tok|vero_id|oly_anon_id|oly_enc_id|_ga|_gl|si|smid|ref_src|ref_url|trk) removed="${removed:+$removed, }${p%%=*}" ;;
       *) out="${out:+$out&amp;}$p" ;;
     esac
   done
@@ -130,7 +130,7 @@ unwrap() {
 inner=$(unwrap "$url"); url=${inner:-$url}
 doh=(); [ -n "$doh_url" ] &amp;&amp; doh=(--doh-url "$doh_url")
 fetch() { curl -sL "$@" --max-time 15 "${doh[@]}" -o /dev/null -w '%{url_effective}\t%{http_code}\t%{num_redirects}' "$url"; }
-item() { printf '{"title":"%s","subtitle":"%s","arg":"%s","icon":{"path":"%s"},"mods":{"cmd":{"subtitle":"Paste into the frontmost app"},"alt":{"subtitle":"Open in browser"}}}' "$(esc "$1")" "$(esc "$2")" "$(esc "$1")" "$3"; }
+item() { printf '{"title":"%s","subtitle":"%s  │  ↩ copy  ⌘↩ paste  ⌥↩ open","arg":"%s","icon":{"path":"%s"},"mods":{"cmd":{"subtitle":"Paste into the frontmost app"},"alt":{"subtitle":"Open in browser"}}}' "$(esc "$1")" "$(esc "$2")" "$(esc "$1")" "$3"; }
 out=$(fetch -I); rc=$?
 IFS=$'\t' read -r final code hops &lt;&lt;&lt; "$out"
 # some servers refuse HEAD; retry once with GET and throw the body away
