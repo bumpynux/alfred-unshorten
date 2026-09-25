@@ -7,7 +7,8 @@ fi
 url=$(printf '%s' "$q" | grep -oE 'https?://[^[:space:]<>"]+' | head -n 1)
 [ -z "$url" ] && url="https://$q"
 esc() { printf '%s' "$1" | sed 's/\\/\\\\/g; s/"/\\"/g' | tr -d '\000-\037'; }
-# known tracking params; add new ones to this pattern
+# tracking-params.txt is one name per line; a trailing * matches a prefix
+tracking="^($(grep -v '^$' tracking-params.txt | sed 's/\*/.*/g' | paste -sd '|' -))$"
 clean() {  # sets $cleaned and $removed
   local u="$1" base q frag="" out="" p
   cleaned="$1"; removed=""
@@ -15,10 +16,8 @@ clean() {  # sets $cleaned and $removed
   case "$u" in *'?'*) base="${u%%\?*}"; q="${u#*\?}";; *) return;; esac
   IFS='&' read -r -a parts <<< "$q"
   for p in "${parts[@]}"; do
-    case "${p%%=*}" in
-      utm_*|fbclid|gclid|dclid|gbraid|wbraid|msclkid|yclid|twclid|ttclid|igshid|mc_cid|mc_eid|_hsenc|_hsmi|mkt_tok|vero_id|oly_anon_id|oly_enc_id|_ga|_gl|si|smid|ref_src|ref_url|trk) removed="${removed:+$removed, }${p%%=*}" ;;
-      *) out="${out:+$out&}$p" ;;
-    esac
+    if [[ ${p%%=*} =~ $tracking ]]; then removed="${removed:+$removed, }${p%%=*}"
+    else out="${out:+$out&}$p"; fi
   done
   cleaned="$base${out:+?$out}$frag"
 }

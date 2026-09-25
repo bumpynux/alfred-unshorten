@@ -4,4 +4,4 @@ set -e
 cd "$(dirname "$0")/src"
 plutil -replace objects.0.config.script -string "$(cat unshorten.sh)" info.plist
 rm -f ../Unshorten.alfredworkflow
-zip -j ../Unshorten.alfredworkflow info.plist icon.png clean.png full.png
+zip -j ../Unshorten.alfredworkflow info.plist tracking-params.txt icon.png clean.png full.png
