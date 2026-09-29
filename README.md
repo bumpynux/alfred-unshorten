@@ -1,6 +1,6 @@
 # Unshorten
 
-Resolve shortlinks to their final URL and strip tracking parameters.
+An Alfred workflow that resolves shortlinks to their final URL and strips tracking parameters.
 
 DNS filters, like Pi-hole and NextDNS, block most link shorteners. Sometimes you still need to resolve a shortlink to see where it's going. This workflow follows the redirects, expands the shortlink, optionally cleans the tracking parameters off it, and lets you copy, paste, or open the result.
 
