@@ -79,7 +79,7 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>keyword</key>
-				<string>unshort</string>
+				<string>{var:keyword}</string>
 				<key>queuedelaycustom</key>
 				<integer>1</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -310,6 +310,27 @@ How it works:
 			<key>config</key>
 			<dict>
 				<key>default</key>
+				<string>unshort</string>
+				<key>placeholder</key>
+				<string>unshort</string>
+				<key>required</key>
+				<true/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>The keyword that triggers the workflow.</string>
+			<key>label</key>
+			<string>Keyword</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>keyword</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
 				<string>https://cloudflare-dns.com/dns-query</string>
 				<key>placeholder</key>
 				<string>Leave empty to use system DNS</string>
@@ -329,7 +350,7 @@ How it works:
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.5</string>
+	<string>1.6</string>
 	<key>webaddress</key>
 	<string>https://github.com/bumpynux/alfred-unshorten</string>
 </dict>
