@@ -45,4 +45,6 @@ open Unshorten.alfredworkflow
 
 The list of tracking parameters is in [`src/tracking-params.txt`](src/tracking-params.txt), one name per line, with a trailing `*` for prefixes like `utm_*`. Affiliate tags such as Amazon's `tag` are left alone on purpose, since they credit whoever shared the link rather than track you. If you find a tracking parameter it misses, please let me know by opening an [issue](https://github.com/bumpynux/alfred-unshorten/issues/new) or a [pull request](https://github.com/bumpynux/alfred-unshorten/pulls).
 
+There's also a [thread on the Alfred forum](https://www.alfredforum.com/topic/24092-unshorten-resolve-shortlinks-and-strip-tracking-parameters/) if you'd rather talk there.
+
 If something else on your Mac already strips tracking parameters from copied links, you will mostly see the Full row. The workflow still does the resolving.
