@@ -93,7 +93,7 @@
 				<key>script</key>
 				<string>q="$1"
 if [ -z "$q" ]; then
-  printf '{"items":[{"title":"Paste a shortlink","subtitle":"↩ copy · ⌘↩ paste · ⌥↩ open · Clean row strips tracking params, Full row keeps them","valid":false}]}'
+  printf '{"items":[{"title":"Paste a shortlink","subtitle":"Clean row strips tracking params, Full row keeps them","valid":false}]}'
   exit
 fi
 # first URL in whatever was pasted, or treat the input as a bare host
@@ -129,7 +129,7 @@ unwrap() {
 inner=$(unwrap "$url"); url=${inner:-$url}
 doh=(); [ -n "$doh_url" ] &amp;&amp; doh=(--doh-url "$doh_url")
 fetch() { curl -sL "$@" --max-time 15 "${doh[@]}" -o /dev/null -w '%{url_effective}\t%{http_code}\t%{num_redirects}' "$url"; }
-item() { printf '{"title":"%s","subtitle":"%s  │  ↩ copy  ⌘↩ paste  ⌥↩ open","arg":"%s","icon":{"path":"%s"},"mods":{"cmd":{"subtitle":"Paste into the frontmost app"},"alt":{"subtitle":"Open in browser"}}}' "$(esc "$1")" "$(esc "$2")" "$(esc "$1")" "$3"; }
+item() { local u; u=$(esc "$1"); printf '{"title":"%s","subtitle":"%s  │  ↩ copy  ⌘↩ paste  ⌥↩ open","arg":"%s","icon":{"path":"%s"}}' "$u" "$(esc "$2")" "$u" "$3"; }
 out=$(fetch -I); rc=$?
 IFS=$'\t' read -r final code hops &lt;&lt;&lt; "$out"
 # some servers refuse HEAD; retry once with GET and throw the body away
