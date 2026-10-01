@@ -41,6 +41,10 @@ The script lives in `src/unshorten.sh` so it's readable. `build.sh` embeds it in
 open Unshorten.alfredworkflow
 ```
 
+## How this was built
+
+I wrote a prototype first, a shell script that used `curl` to follow a shortlink's redirects. I then rebuilt it as an Alfred workflow with Claude Code, which wrote the code in this repo. I scoped it, made the design decisions (what it does, how the results and actions behave, what gets stripped), and tested each iteration in Alfred. I audited it with two Claude Code skills, ponytail for over-engineering and secscan for security triage.
+
 ## Notes
 
 The list of tracking parameters is in [`src/tracking-params.txt`](src/tracking-params.txt), one name per line, with a trailing `*` for prefixes like `utm_*`. Affiliate tags such as Amazon's `tag` are left alone on purpose, since they credit whoever shared the link rather than track you. If you find a tracking parameter it misses, please let me know by opening an [issue](https://github.com/bumpynux/alfred-unshorten/issues/new) or a [pull request](https://github.com/bumpynux/alfred-unshorten/pulls).

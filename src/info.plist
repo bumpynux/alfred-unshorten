@@ -265,7 +265,9 @@ How it works:
 - Only headers are fetched, with one GET retry if the server refuses HEAD. Nothing is rendered.
 - DNS lookups go over DNS-over-HTTPS, so shortener domains resolve even when a DNS filter blocks them.
 - The resolver is a setting, Cloudflare by default. Clear it to use system DNS.
-- Links that wrap the destination in a query parameter (Google's url?q=, newsletter click trackers) are decoded locally, so the tracker is never contacted.</string>
+- Links that wrap the destination in a query parameter (Google's url?q=, newsletter click trackers) are decoded locally, so the tracker is never contacted.
+
+Built with Claude Code. Prototype, design, and testing by bnux.</string>
 	<key>uidata</key>
 	<dict>
 		<key>COPY</key>
@@ -350,7 +352,7 @@ How it works:
 		</dict>
 	</array>
 	<key>version</key>
-	<string>1.6</string>
+	<string>1.6.1</string>
 	<key>webaddress</key>
 	<string>https://github.com/bumpynux/alfred-unshorten</string>
 </dict>
